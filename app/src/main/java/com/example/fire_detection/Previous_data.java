@@ -88,7 +88,7 @@ public class Previous_data extends Fragment {
     }
 
     private void viewHum() {
-        ArrayList<Integer> dbList = new ArrayList<>();
+        ArrayList<String > dbList = new ArrayList<>();
         Cursor humData = db.getHumidity();
         if (humData.getCount() == 0) {
             Toast.makeText(thisContext, "database is empty", Toast.LENGTH_LONG).show();
@@ -96,7 +96,7 @@ public class Previous_data extends Fragment {
         else{
             if(humData.moveToFirst()){
                 do{
-                    dbList.add(humData.getColumnIndex("humidity"));
+                    dbList.add(humData.getString(humData.getColumnIndex("humidity")));
                 }while(humData.moveToNext());
                 humData.close();
             }
@@ -105,14 +105,14 @@ public class Previous_data extends Fragment {
 //            }
         }
 
-        for(int t : dbList){
-            String s = Integer.toString(t);
-            listHumidity.setText(s);
+        for(String t : dbList){
+
+            listHumidity.setText(t);
         }
     }
 
     public void viewTime(){
-        ArrayList<Integer> dbList = new ArrayList<>();
+        ArrayList<String> dbList = new ArrayList<>();
         Cursor timeData = db.getTime();
         if (timeData.getCount() == 0) {
             Toast.makeText(thisContext, "database is empty", Toast.LENGTH_LONG).show();
@@ -120,7 +120,7 @@ public class Previous_data extends Fragment {
         else{
             if(timeData.moveToFirst()){
                 do{
-                    dbList.add(timeData.getColumnIndex("time"));
+                    dbList.add(timeData.getString(timeData.getColumnIndex("time")));
                 }while(timeData.moveToNext());
                 timeData.close();
             }
@@ -129,14 +129,13 @@ public class Previous_data extends Fragment {
 //            }
         }
 
-        for(int t : dbList){
-            String s = Integer.toString(t);
-            listTime.setText(s);
+        for(String t : dbList){
+            listTime.setText(t);
         }
     }
 
     public void viewTemp(){
-        ArrayList<Integer> dbList = new ArrayList<>();
+        ArrayList<String> dbList = new ArrayList<>();
         Cursor tempData = db.getTemp();
         if (tempData.getCount() == 0) {
             Toast.makeText(thisContext, "database is empty", Toast.LENGTH_LONG).show();
@@ -144,7 +143,7 @@ public class Previous_data extends Fragment {
         else{
             if(tempData.moveToFirst()){
                 do{
-                    dbList.add(tempData.getColumnIndex("temperature"));
+                    dbList.add(tempData.getString(tempData.getColumnIndex("temperature")));
                 }while(tempData.moveToNext());
                 tempData.close();
             }
@@ -153,9 +152,8 @@ public class Previous_data extends Fragment {
 //            }
         }
 
-        for(int t : dbList){
-            String s = Integer.toString(t);
-            listTemp.setText(s);
+        for(String t : dbList){
+            listTemp.setText(t);
         }
     }
 
