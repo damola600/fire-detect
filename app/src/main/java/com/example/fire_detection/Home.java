@@ -68,9 +68,11 @@ public class Home extends Fragment {
     TextView fireProbability=null;
     DatabaseHelper db;
     Context thisContext;
-    private Runnable mRunnable;
-    Handler handler;
 
+//    for refreshing method invoke
+    Handler handler = new Handler();
+    Runnable runnable;
+    int delay = 5000;
 
     public Home() {
         // Required empty public constructor
@@ -120,24 +122,6 @@ public class Home extends Fragment {
         hum2 = (TextView)v.findViewById(R.id.hum2);
         time1 = (TextView)v.findViewById(R.id.time1);
         time2 = (TextView)v.findViewById(R.id.time2);
-        handler = new Handler();
-        mRunnable = new Runnable() {
-            @Override
-            public void run() {
-                parseData();
-
-
-                //handler.postDelayed((Runnable) thisContext, 1000);
-
-            }
-        };
-        handler.postDelayed(mRunnable, 1000);
-
-
-
-
-
-
 
         fireProbability = (TextView)v.findViewById(R.id.fireprob);
 
@@ -162,11 +146,29 @@ public class Home extends Fragment {
         String dateTime = currDateTime();
         currDate.setText(dateTime);
 
-
         // Inflate the layout for this fragment
-
         return v;
 
+    }
+
+    @Override
+    public void onResume() {
+        handler.postDelayed(runnable = new Runnable() {
+            @Override
+            public void run() {
+                handler.postDelayed(runnable, delay);
+                parseData();
+                Log.d("refreshLog", "Code gets here");
+            }
+        }, delay);
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+//        stop handler when activity is not visible
+        handler.removeCallbacks(runnable);
+        super.onPause();
     }
 
     public void checkFire(String h){
@@ -195,8 +197,7 @@ public class Home extends Fragment {
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
-        String dateText = formatter.format(date);
-        return dateText;
+        return formatter.format(date);
 
     }
 
@@ -299,20 +300,8 @@ public class Home extends Fragment {
 
                     }
 
-
-
-
-
-
-
-
-
-
-
-
         }
 
     }
-
 
 }
