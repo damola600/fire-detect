@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,10 +25,11 @@ import java.util.ArrayList;
  */
 public class Previous_data extends Fragment {
     DatabaseHelper db;
-    TextView listTime;
-    TextView listTemp;
-    TextView listHumidity;
+    GridView mGridView;
+    ArrayList<String> dblist;
+    ArrayAdapter<String> mAdapter;
     Context thisContext;
+    String time, temp, humidity;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -76,86 +79,31 @@ public class Previous_data extends Fragment {
         View v = inflater.inflate(R.layout.fragment_previous_data, container, false);
         thisContext = container.getContext();
         db = new DatabaseHelper(thisContext, null, null, 1);
-        listTime = (TextView) v.findViewById(R.id.dbtime);
-        listTemp = (TextView) v.findViewById(R.id.dbtemp);
-        listHumidity = (TextView) v.findViewById(R.id.dbhum);
-
-        viewTime();
-        viewTemp();
-        viewHum();
+        mGridView = (GridView)v.findViewById(R.id.dataview);
+        dblist = new ArrayList<String>();
+        mAdapter = new ArrayAdapter<String>(thisContext, android.R.layout.simple_spinner_item, dblist);
+        try{
+            Cursor w = db.getData();
+            if(w.moveToFirst()){
+                do{
+                    time = w.getString(w.getColumnIndex("time"));
+                    temp = w.getString(w.getColumnIndex("temperature"));
+                    humidity = w.getString(w.getColumnIndex("humidity"));
+                    dblist.add(time);
+                    dblist.add(temp);
+                    dblist.add(humidity);
+                    mGridView.setAdapter(mAdapter);
+                }while(w.moveToNext());
+            }else{
+                Toast.makeText(thisContext, "no data found", Toast.LENGTH_LONG).show();
+            }
+        }catch (Exception e){
+            Toast.makeText(thisContext, "no data found"+e.getMessage(), Toast.LENGTH_LONG).show();
+        }
 
         return v;
     }
 
-    private void viewHum() {
-        ArrayList<String > dbList = new ArrayList<>();
-        Cursor humData = db.getHumidity();
-        if (humData.getCount() == 0) {
-            Toast.makeText(thisContext, "database is empty", Toast.LENGTH_LONG).show();
-        }
-        else{
-            if(humData.moveToFirst()){
-                do{
-                    dbList.add(humData.getString(humData.getColumnIndex("humidity")));
-                }while(humData.moveToNext());
-                humData.close();
-            }
-//            while(humData.moveToNext()){
-//                dbList.add(humData.getString(0));
-//            }
-        }
-
-        for(String t : dbList){
-
-            listHumidity.setText(t);
-        }
-    }
-
-    public void viewTime(){
-        ArrayList<String> dbList = new ArrayList<>();
-        Cursor timeData = db.getTime();
-        if (timeData.getCount() == 0) {
-            Toast.makeText(thisContext, "database is empty", Toast.LENGTH_LONG).show();
-        }
-        else{
-            if(timeData.moveToFirst()){
-                do{
-                    dbList.add(timeData.getString(timeData.getColumnIndex("time")));
-                }while(timeData.moveToNext());
-                timeData.close();
-            }
-//            while(timeData.moveToNext()){
-//                dbList.add(timeData.getString(0));
-//            }
-        }
-
-        for(String t : dbList){
-            listTime.setText(t);
-        }
-    }
-
-    public void viewTemp(){
-        ArrayList<String> dbList = new ArrayList<>();
-        Cursor tempData = db.getTemp();
-        if (tempData.getCount() == 0) {
-            Toast.makeText(thisContext, "database is empty", Toast.LENGTH_LONG).show();
-        }
-        else{
-            if(tempData.moveToFirst()){
-                do{
-                    dbList.add(tempData.getString(tempData.getColumnIndex("temperature")));
-                }while(tempData.moveToNext());
-                tempData.close();
-            }
-//            while(tempData.moveToNext()){
-//                dbList.add(tempData.getString(0));
-//            }
-        }
-
-        for(String t : dbList){
-            listTemp.setText(t);
-        }
-    }
 
 
 }
