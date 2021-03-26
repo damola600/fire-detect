@@ -102,6 +102,7 @@ public class Previous_data extends Fragment {
         }
 
         return v;
+
     }
 
 
