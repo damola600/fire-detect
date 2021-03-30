@@ -253,7 +253,7 @@ public class Home extends Fragment {
 
 
                         JSONObject firstObj = jsonArray.getJSONObject(1);
-                        String time = firstObj.getString("created_at");
+                        String time = firstObj.getString("field3");
                         String id = firstObj.getString("entry_id");
                         String temp = firstObj.getString("field1");
                         String pressure = firstObj.getString("field3");
@@ -280,8 +280,6 @@ public class Home extends Fragment {
                         currTemp.setText(temp);
                         currHum.setText(humidity);
                         fireProbability.setText(fProb);
-
-
 
                         time1.setText(time);
                         temp1.setText(temp);
