@@ -233,8 +233,6 @@ public class Home extends Fragment {
 
 
 
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -19,7 +19,7 @@
 
             android:textColor="@color/white"
             android:fontFamily="sans-serif-black"
-            android:text = "Date and Time:"></TextView>
+            android:text="Date and Time:" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -29,8 +29,7 @@
             android:inputType="date"
             android:paddingLeft="10dp"
 
-            android:textColor="@color/white"
-            ></TextView>
+            android:textColor="@color/white" />
 
     </LinearLayout>
 
@@ -43,13 +42,14 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingTop="10dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tempText"
             android:text="Current Temperature:"
             android:fontFamily="sans-serif-black"
-            android:textColor="@color/white"></TextView>
+            android:textColor="@color/white" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -57,7 +57,7 @@
             android:id="@+id/dispTemp"
             android:text="Temperature"
             android:paddingLeft="10dp"
-            android:textColor="@color/white"></TextView>
+            android:textColor="@color/white" />
     </LinearLayout>
 
     <LinearLayout
@@ -141,14 +141,15 @@
 
         <TableRow
             android:padding="5dp"
-            android:background="@color/purple_500">
+            android:background="?attr/colorSecondary">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
                 android:id="@+id/time1"
                 android:paddingRight="10dp"
-                android:textColor="@color/white"></TextView>
+                android:textColor="@color/black" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -156,7 +157,7 @@
                 android:text=""
                 android:id="@+id/temp1"
                 android:paddingRight="10dp"
-                android:textColor="@color/white"></TextView>
+                android:textColor="@color/black" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -164,7 +165,7 @@
                 android:text=""
                 android:id="@+id/hum1"
                 android:paddingRight="10dp"
-                android:textColor="@color/white"></TextView>
+                android:textColor="@color/black" />
 
         </TableRow>
 
