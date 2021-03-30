@@ -261,7 +261,7 @@ public class Home extends Fragment {
                         double fireprob = firstObj.getDouble("field4");
 
                         JSONObject secondObj = jsonArray.getJSONObject(0);
-                        String time02 = secondObj.getString("created_at");
+                        String time02 = secondObj.getString("field3");
                         String id2 = secondObj.getString("entry_id");
                         String temp02 = secondObj.getString("field1");
                         String pressure2 = secondObj.getString("field3");

@@ -9,14 +9,14 @@
         android:layout_height="wrap_content"
         android:id="@+id/firetext"
         android:textColor="#FFFFFF"
-        android:text="there is a high probabiltiy of fire"
-        android:textStyle="bold"></TextView>
+        android:text="HIGH FIRE PROBABILITY"
+        android:textStyle="bold" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/dismiss_btn"
         android:text="Dismiss"
-        android:layout_marginTop="20dp"></Button>
+        android:layout_marginTop="20dp" />
 
 </RelativeLayout>
